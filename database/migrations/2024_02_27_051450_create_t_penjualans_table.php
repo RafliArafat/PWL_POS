@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->string('pembeli', 50);
             $table->string('penjualan_kode', 20)->unique(); //unique untuk memastikan tidak ada kode penjualan yang sama
-            $table->timestamp('penjualan_tanggal');
+            $table->dateTime('penjualan_tanggal');
 
             $table->foreign('user_id')->references('user_id')->on('m_users');
         });
