@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -24,17 +25,18 @@ class UserSeeder extends Seeder
             [
                 'user_id' => 2,
                 'level_id' => 2,
-                'username' => 'admin',
-                'nama' => 'Administrator',
+                'username' => 'manager',
+                'nama' => 'Manager',
                 'password' => Hash::make('12345'), // class untuk mengenkripsi/hash password
             ],
             [
                 'user_id' => 3,
                 'level_id' => 3,
-                'username' => 'admin',
-                'nama' => 'Administrator',
+                'username' => 'staff',
+                'nama' => 'Staff/Kasir',
                 'password' => Hash::make('12345'), // class untuk mengenkripsi/hash password
             ],
-        ]
+        ];
+        DB::table('m_users')->insert($data);
     }
 }
