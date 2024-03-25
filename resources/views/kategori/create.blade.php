@@ -22,7 +22,10 @@
                     </div>
                     <div class="form-group">
                         <label for="namaKategori">Nama Kategori</label>
-                        <input type="text" name="namaKategori" id="namaKategori" class="form-control" placeholder="nama">
+                        <input type="text" name="namaKategori" id="namaKategori" class="@error('namaKategori') is-invalid @enderror" placeholder="nama">
+                        @error('namaKategori')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -32,14 +35,13 @@
             </form>
         </div>
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                {{-- @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach --}}
+            </ul>
+        </div>
+    @endif
 @endsection
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
