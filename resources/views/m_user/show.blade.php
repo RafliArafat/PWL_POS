@@ -1,4 +1,4 @@
-@extends('m_user/template')
+{{-- @extends('m_user/template')
 @section('content')
 <div class="row mt-5 mb-5">
     <div class="col-lg-12 margin-tb">
@@ -36,6 +36,45 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Password:</strong>
+            {{ $useri->password }}
+        </div>
+    </div>
+</div>
+@endsection --}}
+@extends('m_user/template')
+
+@section('content')
+<div class="row mt-5 mb-5">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Show User</h2>
+            <a href="{{ route('m_user.index') }}" class="btn btn-secondary">Kembali</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <strong>User ID:</strong>
+            {{ $useri->user_id }}
+        </div>
+        <div class="form-group">
+            <strong>Level ID:</strong>
+            {{ $useri->level_id }}
+        </div>
+        <div class="form-group">
+            <strong>Username:</strong>
+            {{ $useri->username }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <strong>Nama:</strong>
+            {{ $useri->nama }}
+        </div>
         <div class="form-group">
             <strong>Password:</strong>
             {{ $useri->password }}
