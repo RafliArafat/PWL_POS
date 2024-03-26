@@ -1,7 +1,7 @@
 @extends('layout.app')
 
-@section('subtitle', 'User')
-@section('content_header_title', 'User')
+@section('subtitle', 'Level')
+@section('content_header_title', 'Level')
 @section('content_header_subtitle', 'Create')
 
 @section('content')
@@ -13,15 +13,16 @@
                 <h3 class="card-title">Form Level</h3>
               </div>
       
-              <form>
+              <form action="../level" method="POST">
+                @csrf
                 <div class="card-body">
                   <div class="form-group">
                     <label for="levelKode">Kode level</label>
-                    <input type="text" class="form-control" id="levelKode" name="levelKode" placeholder="Contoh STF untuk Staff">
+                    <input type="text" class="form-control @error('levelKode') is-invalid @enderror" id="levelKode" name="levelKode" placeholder="Contoh STF untuk Staff">
                   </div>
                   <div class="form-group">
                     <label for="levelNama">Nama level</label>
-                    <input type="text" class="form-control" id="levelNama" name="levelNama" placeholder="Masukkan nama level">
+                    <input type="text" class="form-control @error('levelNama') is-invalid @enderror" id="levelNama" name="levelNama" placeholder="Masukkan nama level">
                   </div>
                 </div>
       

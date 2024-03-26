@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -168,5 +169,15 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('/user');
+    }
+
+    public function store(Request $request): RedirectResponse{
+        $validated = $request->validate([
+            'username' => 'bail|required',
+            'nama' => 'required',
+            'password' => 'required',
+            'level_id' => 'required',
+        ]);
+        return redirect('/user/create');
     }
 }

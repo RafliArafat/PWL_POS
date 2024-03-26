@@ -329,7 +329,7 @@ return [
         ],
         [
             'text' => 'User',
-            'url' => 'user/create',
+            'url' => 'm_user',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
