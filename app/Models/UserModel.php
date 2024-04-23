@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UserModel extends Model implements Authenticatable
+class UserModel extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
-    use AuthenticatableTrait;
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 
     protected $table = 'm_users';
     protected $primaryKey = 'user_id';
