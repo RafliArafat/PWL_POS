@@ -61,6 +61,7 @@
                                 <th>Harga</th>
                                 <th>Jumlah</th>
                                 <th>Total Harga</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -109,7 +110,13 @@
                 '<td><input type="text" class="form-control harga" name="harga[]" readonly></td>' +
                 '<td><input type="number" class="form-control jumlah" name="jumlah[]" required></td>' +
                 '<td><input type="number" class="form-control total_harga" name="total_harga[]" readonly></td>' +
+                '<td><button type="button" class="btn btn-danger btn-sm btn-batal">Batal</button></td>' +
                 '</tr>');
+        });
+
+        $('body').on('click', '.btn-batal', function() {
+            $(this).closest('tr').remove(); // Hapus baris dari tabel
+            updateTotalHarga(); // Perbarui total harga setelah menghapus baris
         });
 
         // Ketika dropdown barang dipilih, perbarui harga secara otomatis

@@ -25,7 +25,7 @@
                                     <option value="{{$item->kategori_id}}">{{$item->kategori_nama}}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Level Pengguna</small>
+                            <small class="form-text text-muted">Kategori</small>
                         </div>
                     </div>
                 </div>

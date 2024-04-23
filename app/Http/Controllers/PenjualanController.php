@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BarangModel;
 use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
+use App\Models\StokModel;
 use App\Models\UserModel;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -32,7 +33,7 @@ class PenjualanController extends Controller
     public function list(Request $request){
         $penjualans = PenjualanModel::select('penjualan_id', 'pembeli', 'user_id','penjualan_tanggal', 'penjualan_kode')->with('user')
         ->withCount(['penjualan_detail as total_harga' => function (Builder $query) {
-            $query->select(DB::raw('SUM(harga) as total_harga')); // Gunakan alias untuk hasil perhitungan
+            $query->select(DB::raw('SUM(harga) as total_harga')); // untuk menghitung total harga di data table
         }]);
 
         // if ($request->user_id){
@@ -93,6 +94,10 @@ class PenjualanController extends Controller
                 'harga' => $request->total_harga[$key],
                 'jumlah' => $request->jumlah[$key]
             ]);
+            $stok = StokModel::find($barangId);
+            StokModel::find($barangId)->update([
+                'stok_jumlah' => ($stok->stok_jumlah - $request->jumlah[$key]),
+            ]);
         }
 
         return redirect('/penjualan')->with('success', 'Data Penjualan berhasil disimpan');
@@ -122,9 +127,9 @@ class PenjualanController extends Controller
     }
     public function edit(string $id){
         $penjualan = PenjualanModel::find($id);
-        $barang = BarangModel::all();
-        $user = UserModel::all();
-        $penjualanDetail = PenjualanDetailModel::where('penjualan_id', $penjualan->penjualan_id)->get();
+        $barang = BarangModel::all(); //untuk menampilkan data di form
+        $user = UserModel::all(); //untuk menampilkan data di form
+        $penjualanDetail = PenjualanDetailModel::where('penjualan_id', $penjualan->penjualan_id)->get(); //untuk menampilkan data barang (detail penjualan) yang dibeli di form
 
         $breadcrumb = (object)[
             'title' => 'Edit Penjualan',
